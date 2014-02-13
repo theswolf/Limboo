@@ -1,0 +1,7 @@
+<resources>
+
+    <string name="app_name">LimBot</string>
+    <string name="ic_drawer_open">Open</string>
+    <string name="ic_drawer_close">Close</string>
+
+</resources>

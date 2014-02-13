@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="SeptemberRedTheme" parent="@style/_SeptemberRedTheme"/>
+
+  <style name="_SeptemberRedTheme" parent="Theme.AppCompat.Light">
+
+    <item name="android:editTextStyle">@style/EditTextSeptemberRedTheme</item>
+
+    <item name="android:textColorHighlight">#99ff4444</item>
+
+    <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewSeptemberRedTheme</item>
+
+    <item name="android:checkboxStyle">@style/CheckBoxSeptemberRedTheme</item>
+
+    <item name="android:radioButtonStyle">@style/RadioButtonSeptemberRedTheme</item>
+
+    <item name="android:buttonStyle">@style/ButtonSeptemberRedTheme</item>
+
+    <item name="android:imageButtonStyle">@style/ImageButtonSeptemberRedTheme</item>
+
+    <item name="android:spinnerStyle">@style/SpinnerSeptemberRedTheme</item>
+
+    <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemSeptemberRedTheme</item>
+
+    <item name="android:progressBarStyleHorizontal">@style/ProgressBarSeptemberRedTheme</item>
+
+    <item name="android:seekBarStyle">@style/SeekBarSeptemberRedTheme</item>
+
+    <item name="android:ratingBarStyle">@style/RatingBarSeptemberRedTheme</item>
+
+    <item name="android:ratingBarStyleIndicator">@style/RatingBarBigSeptemberRedTheme</item>
+
+    <item name="android:ratingBarStyleSmall">@style/RatingBarSmallSeptemberRedTheme</item>
+
+    <item name="android:buttonStyleToggle">@style/ToggleSeptemberRedTheme</item>
+
+    <item name="android:listViewStyle">@style/ListViewSeptemberRedTheme</item>
+
+    <item name="android:listViewWhiteStyle">@style/ListViewSeptemberRedTheme.White</item>
+
+    <item name="android:spinnerItemStyle">@style/SpinnerItemSeptemberRedTheme</item>
+
+  </style>
+
+</resources>

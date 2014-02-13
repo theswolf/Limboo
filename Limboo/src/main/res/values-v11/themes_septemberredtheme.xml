@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="SeptemberRedTheme" parent="@style/_SeptemberRedTheme"/>
+
+  <style name="_SeptemberRedTheme" parent="Theme.AppCompat.Light">
+
+    <item name="android:editTextBackground">@drawable/septemberredtheme_edit_text_holo_light</item>
+
+    <item name="android:textColorHighlight">#99ff4444</item>
+    <item name="android:textSelectHandleLeft">@drawable/septemberredtheme_text_select_handle_left</item>
+    <item name="android:textSelectHandleRight">@drawable/septemberredtheme_text_select_handle_right</item>
+    <item name="android:textSelectHandle">@drawable/septemberredtheme_text_select_handle_middle</item>
+
+    <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewSeptemberRedTheme</item>
+
+    <item name="android:listChoiceIndicatorMultiple">@drawable/septemberredtheme_btn_check_holo_light</item>
+
+    <item name="android:listChoiceIndicatorSingle">@drawable/septemberredtheme_btn_radio_holo_light</item>
+
+    <item name="android:buttonStyle">@style/ButtonSeptemberRedTheme</item>
+
+    <item name="android:imageButtonStyle">@style/ImageButtonSeptemberRedTheme</item>
+
+    <item name="android:dropDownSpinnerStyle">@style/SpinnerSeptemberRedTheme</item>
+
+    <item name="android:progressBarStyleHorizontal">@style/ProgressBarSeptemberRedTheme</item>
+
+    <item name="android:seekBarStyle">@style/SeekBarSeptemberRedTheme</item>
+
+    <item name="android:ratingBarStyle">@style/RatingBarSeptemberRedTheme</item>
+
+    <item name="android:ratingBarStyleIndicator">@style/RatingBarBigSeptemberRedTheme</item>
+
+    <item name="android:ratingBarStyleSmall">@style/RatingBarSmallSeptemberRedTheme</item>
+
+    <item name="android:buttonStyleToggle">@style/ToggleSeptemberRedTheme</item>
+
+    <item name="android:listChoiceBackgroundIndicator">@drawable/septemberredtheme_list_selector_holo_light</item>
+
+    <item name="android:activatedBackgroundIndicator">@drawable/septemberredtheme_activated_background_holo_light</item>
+
+    <item name="android:fastScrollThumbDrawable">@drawable/septemberredtheme_fastscroll_thumb_holo</item>
+
+  </style>
+
+</resources>
