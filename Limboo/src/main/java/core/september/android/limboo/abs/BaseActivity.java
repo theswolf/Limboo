@@ -19,6 +19,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import core.september.android.limboo.R;
 
+
+
 public abstract class BaseActivity<T> extends ActionBarActivity {
 
     protected DrawerLayout mDrawerLayout;

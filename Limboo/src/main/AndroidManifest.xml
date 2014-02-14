@@ -6,6 +6,16 @@
         android:icon="@drawable/ic_launcher"
         android:theme="@style/Theme.Septemberredactionbar">
 
+        <activity android:name=".activities.ActionBarDrawerActivity"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>
