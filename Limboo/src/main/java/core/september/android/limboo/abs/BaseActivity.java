@@ -85,7 +85,9 @@ public abstract class BaseActivity<T> extends ActionBarActivity {
     }
 
     protected abstract <T> ArrayAdapter<T> getDrawerListAdapter();
+    //return current menu to inflate
     protected abstract int getMenuInflate();
+    //action performed on darwer item selected
     protected abstract void onItemSelected(int position);
     protected abstract void setItemTitle(int position);
     protected abstract Fragment getFragment();
@@ -131,10 +133,10 @@ public abstract class BaseActivity<T> extends ActionBarActivity {
         //Fragment fragment = null;
         onItemSelected(position);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.content_frame, getFragment())
-                .commit();
+        //FragmentManager fragmentManager = getSupportFragmentManager();
+        //fragmentManager.beginTransaction()
+        //        .replace(R.id.content_frame, getFragment())
+        //        .commit();
 
         // Highlight the selected item, update the title, and close the drawer
         mDrawerList.setItemChecked(position, true);
