@@ -2,25 +2,67 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="core.september.android.limboo">
 
+    <!--uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" /-->
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="19" />
+
     <application
+        android:name=".app.Limboo"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/Theme.Septemberredactionbar">
+
+
+        <service
+            android:name=".services.LimbooMainService"
+            android:enabled="true"
+            android:exported="true"></service>
+
+        <!--
+            <receiver android:name=".receivers.AfterBoot" android:enabled="true" android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+        -->
+
         <activity
-            android:name="core.september.android.limboo.activities.ActionBarDrawerActivity"
+            android:name=".activities.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity
+            android:name=".activities.SignUpActivity"
+            android:label="@string/title_activity_signup"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+
+
+        <activity
+            android:name=".activities.ActionBarDrawerActivity"
             android:screenOrientation="landscape"
             android:windowSoftInputMode="adjustResize|stateVisible" >
+            <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
+
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+
+        <activity
+            android:name=".activities.SplashActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_splash"
+            android:theme="@style/FullscreenTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activities.LoginActivity"
-            android:label="@string/title_activity_login"
-            android:windowSoftInputMode="adjustResize|stateVisible"></activity>
     </application>
 
 </manifest>

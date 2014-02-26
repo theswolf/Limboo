@@ -3,6 +3,7 @@ package core.september.android.limboo.activities;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -12,8 +13,9 @@ import com.quickblox.module.auth.QBAuth;
 import com.quickblox.module.users.QBUsers;
 import com.quickblox.module.users.model.QBUser;
 
+import java.util.regex.Pattern;
+
 import core.september.android.limboo.R;
-import core.september.android.limboo.abs.AuthActivity;
 import core.september.android.limboo.app.Limboo;
 import core.september.android.limboo.constants.Const;
 import core.september.android.limboo.models.AppUser;
@@ -22,84 +24,79 @@ import core.september.android.limboo.models.AppUser;
  * Activity which displays a login screen to the user, offering registration as
  * well.
  */
-public class LoginActivity extends AuthActivity {
-
-    protected String mUsername;
-    protected String mPassword;
+public class SignUpActivity extends LoginActivity {
+    /**
+     * A dummy authentication store containing known user names and passwords.
+     * TODO: remove after connecting to a real authentication system.
+     */
 
     // UI references.
-    protected EditText mUserView;
-    protected EditText mPasswordView;
-    protected boolean cancel;
-    protected View focusView = null;
+    //   protected EditText mUserView;
+    //   protected EditText mPasswordView;
+    protected String mEmail;
+    protected String mPasswordConfirm;
+    protected EditText mEmailView;
+    protected EditText mPasswordConfirmView;
+    protected Button mAlredySignedButton;
+
+    private static final String EMAIL_PATTERN =
+            "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
     @Override
     protected int getContentView() {
-        return R.layout.activity_login;
+        return R.layout.activity_signup;
     }
 
     @Override
     protected void initiateUI() {
-        // Set up the login form.
-        //mEmail = getIntent().getStringExtra(EXTRA_EMAIL);
-        mUserView = (EditText) findViewById(R.id.username);
-        //mEmailView.setText(mEmail);
 
-        mPasswordView = (EditText) findViewById(R.id.password);
-//        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//            @Override
-//            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-//                if (id == R.id.login || id == EditorInfo.IME_NULL) {
-//                    attemptLogin();
-//                    return true;
-//                }
-//                return false;
-//            }
-//        });
+        super.initiateUI();
+        mEmailView = (EditText) findViewById(R.id.email);
+        mPasswordConfirmView = (EditText) findViewById(R.id.confirm_password);
+        mAlredySignedButton = (Button) findViewById(R.id.already_signed_button);
+
+        mAlredySignedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+            }
+        });
+
+
     }
 
-
-    /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
-     */
-
+    @Override
     protected boolean checkField() {
         // Reset errors.
-        mUserView.setError(null);
-        mPasswordView.setError(null);
+        mEmailView.setError(null);
+        mPasswordConfirmView.setError(null);
 
         // Store values at the time of the login attempt.
-        mUsername = mUserView.getText().toString();
-        mPassword = mPasswordView.getText().toString();
+        mEmail = mEmailView.getText().toString();
+        mPasswordConfirm = mPasswordConfirmView.getText().toString();
 
         cancel = false;
 
 
         // Check for a valid password.
-        if (TextUtils.isEmpty(mPassword)) {
-            mPasswordView.setError(getString(R.string.error_field_required));
-            focusView = mPasswordView;
-            cancel = true;
-        } else if (mPassword.length() < 4) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
+        if (TextUtils.isEmpty(mPasswordConfirm) && !mPasswordConfirm.equals(mPassword)) {
+            mPasswordConfirmView.setError(getString(R.string.error_pass_mismatching));
+            focusView = mPasswordConfirmView;
             cancel = true;
         }
 
-        if (TextUtils.isEmpty(mUsername)) {
-            mUserView.setError(getString(R.string.error_field_required));
-            focusView = mUserView;
+        Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+
+        // Check for a valid password.
+        if (TextUtils.isEmpty(mEmail) && !(pattern.matcher(mEmail).matches())) {
+            mEmailView.setError(getString(R.string.error_invalid_email));
+            focusView = mEmailView;
             cancel = true;
         }
 
-        return cancel;
-    }
-
-    public void attemptLogin() {
-
-        doLogin(checkField(), focusView);
+        return super.checkField() && cancel;
     }
 
     protected void doLogin(boolean cancel, View focusView) {
@@ -121,30 +118,27 @@ public class LoginActivity extends AuthActivity {
                 Limboo.getInstance().setAppUser(user);
             }
 
-
             QBAuth.createSession(new QBCallbackImpl() {
                 @Override
                 public void onComplete(Result result) {
                     if (result.isSuccess()) {
-
-                        QBUsers.signIn(new QBUser(mUsername, mPassword), new QBCallbackImpl() {
+                        QBUsers.signUpSignInTask(new QBUser(mUsername, mPassword), new QBCallbackImpl() {
                             @Override
                             public void onComplete(Result result) {
                                 showProgress(false);
                                 if (result.isSuccess()) {
-                                    startActivity(new Intent(LoginActivity.this, Const.LANDING_ACTIVITY));
+                                    startActivity(new Intent(SignUpActivity.this, Const.LANDING_ACTIVITY));
                                 } else {
                                     StringBuilder builder = new StringBuilder();
                                     for (String s : result.getErrors()) {
                                         builder.append(s);
                                         builder.append("/n");
                                     }
-                                    Toast.makeText(LoginActivity.this, builder, Toast.LENGTH_LONG);
+                                    Toast.makeText(SignUpActivity.this, builder, Toast.LENGTH_LONG);
                                 }
                             }
 
                         });
-
                     } else {
                         for (String s : result.getErrors()) {
                             android.util.Log.e(SplashActivity.class.getSimpleName(), s);
@@ -159,5 +153,6 @@ public class LoginActivity extends AuthActivity {
             //mAuthTask.execute((Void) null);
         }
     }
+
 
 }

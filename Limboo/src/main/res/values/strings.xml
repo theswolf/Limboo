@@ -1,6 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">LimBot</string>
+    <string name="app_name">LimBoo</string>
     <string name="ic_drawer_open">Open</string>
     <string name="ic_drawer_close">Close</string>
     <string name="action_settings">Settings</string>
@@ -8,5 +9,13 @@
     <string name="prompt_confirm_email">Confirm mail</string>
     <string name="prompt_username">Username</string>
     <string name="prompt_confirm_password">Confirm Password</string>
+    <string name="error_pass_mismatching">Passwords Doesn\'t Match</string>
+    <string name="title_activity_signup">Sign Up</string>
+    <string name="title_activity_splash">Limboo</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="Limboo">Limboo</string>
+    <string name="action_sign_up">Sign Up</string>
+    <string name="action_login">Already Registered</string>
 
 </resources>

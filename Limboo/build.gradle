@@ -2,7 +2,7 @@ apply plugin: 'android'
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "19.0.0"
+    buildToolsVersion "19.0.2"
 
     defaultConfig {
         minSdkVersion 8
@@ -20,7 +20,13 @@ android {
 
 dependencies {
     compile 'com.android.support:support-v4:19.0.0'
-    compile 'com.android.support:gridlayout-v7:19.0.0'
-    compile 'com.android.support:appcompat-v7:19.0.0'
+    compile('com.android.support:gridlayout-v7:19.0.0')
+    compile('com.android.support:appcompat-v7:19.0.0')
+    compile('com.netflix.rxjava:rxjava-android:0.16.1')
+    //  compile ('com.google.guava:guava:16.0.1')
+    //   compile ('org.reflections:reflections:0.9.9-RC1'){
+    //		exclude group: 'junit'
+    //       	exclude group: 'xml-apis'
+    //	}
     compile fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
 }

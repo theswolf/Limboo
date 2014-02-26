@@ -40,6 +40,9 @@ public abstract class AuthActivity extends Activity {
 
     protected abstract void initiateUI();
 
+    protected abstract boolean checkField();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +95,8 @@ public abstract class AuthActivity extends Activity {
      */
     public abstract void attemptLogin();
 
+    protected abstract void doLogin(boolean cancel, View focusView);
+
 
     /**
      * Shows the progress UI and hides the login form.
@@ -132,6 +137,7 @@ public abstract class AuthActivity extends Activity {
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
+
 
     /**
      * Represents an asynchronous login/registration task used to authenticate
