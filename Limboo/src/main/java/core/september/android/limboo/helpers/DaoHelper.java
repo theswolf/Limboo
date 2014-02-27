@@ -22,7 +22,7 @@ public class DaoHelper {
     }
 
     public static void setAppUser(AppUser appUser) {
-        CRUD.getInstance().delete(appUser, "", "");
+        CRUD.getInstance().delete(appUser, null, null);
         CRUD.getInstance().insert(appUser);
     }
 

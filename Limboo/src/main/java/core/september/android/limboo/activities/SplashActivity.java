@@ -105,10 +105,10 @@ public class SplashActivity extends Activity {
                             controlsView.setVisibility(visible ? View.VISIBLE : View.GONE);
                         }
 
-                        if (visible && AUTO_HIDE) {
+                       /* if (visible && AUTO_HIDE) {
                             // Schedule a hide().
                             delayedHide(AUTO_HIDE_DELAY_MILLIS);
-                        }
+                        }*/
                     }
 
 
@@ -151,9 +151,9 @@ public class SplashActivity extends Activity {
     View.OnTouchListener mDelayHideTouchListener = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
-            if (AUTO_HIDE) {
+         /*   if (AUTO_HIDE) {
                 delayedHide(AUTO_HIDE_DELAY_MILLIS);
-            }
+            }*/
             return false;
         }
     };
@@ -196,6 +196,8 @@ public class SplashActivity extends Activity {
 
 
             }
+            
+
 
 
         }
