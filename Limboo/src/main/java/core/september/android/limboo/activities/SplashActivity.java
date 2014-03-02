@@ -10,15 +10,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ProgressBar;
 
-import com.quickblox.core.QBCallbackImpl;
-import com.quickblox.core.result.Result;
-import com.quickblox.module.auth.QBAuth;
-import com.quickblox.module.users.QBUsers;
-
 import core.september.android.limboo.R;
 import core.september.android.limboo.activities.util.SystemUiHider;
 import core.september.android.limboo.app.Limboo;
-import core.september.android.limboo.constants.Const;
+import core.september.android.limboo.ifaces.AuthCallback;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -166,31 +161,14 @@ public class SplashActivity extends Activity {
             //Intent intent = new Intent();
             if (Limboo.getInstance().getAppUser() == null) {
                 startActivity(new Intent(SplashActivity.this, SignUpActivity.class));
+                SplashActivity.this.finish();
             } else {
 
 
-                QBAuth.createSession(new QBCallbackImpl() {
+                Limboo.getInstance().doSigningProcedure(SplashActivity.this, new AuthCallback() {
                     @Override
-                    public void onComplete(Result result) {
-                        if (result.isSuccess()) {
-                            QBUsers.signIn(Limboo.getInstance().getAppUser().getUserName(), Limboo.getInstance().getAppUser().getPassword(), new QBCallbackImpl() {
-                                @Override
-                                public void onComplete(Result result) {
-                                    // result comes here
-                                    // check if result success
-                                    if (result.isSuccess()) {
-                                        startActivity(new Intent(SplashActivity.this, Const.LANDING_ACTIVITY));
-                                    } else {
-                                        startActivity(new Intent(SplashActivity.this, SignUpActivity.class));
-                                    }
-                                }
-                            });
-                        } else {
-                            for (String s : result.getErrors()) {
-                                android.util.Log.e(SplashActivity.class.getSimpleName(), s);
-                            }
-
-                        }
+                    public void onComplete() {
+                        SplashActivity.this.finish();
                     }
                 });
 

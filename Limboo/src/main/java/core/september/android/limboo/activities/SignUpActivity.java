@@ -5,19 +5,12 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import com.quickblox.core.QBCallbackImpl;
-import com.quickblox.core.result.Result;
-import com.quickblox.module.auth.QBAuth;
-import com.quickblox.module.users.QBUsers;
-import com.quickblox.module.users.model.QBUser;
 
 import java.util.regex.Pattern;
 
 import core.september.android.limboo.R;
 import core.september.android.limboo.app.Limboo;
-import core.september.android.limboo.constants.Const;
+import core.september.android.limboo.ifaces.AuthCallback;
 import core.september.android.limboo.models.AppUser;
 
 /**
@@ -111,43 +104,19 @@ public class SignUpActivity extends LoginActivity {
             showProgress(true);
 
 
-            if (Limboo.getInstance().getAppUser() == null) {
-                AppUser user = new AppUser();
+            //if (Limboo.getInstance().getAppUser() == null) {
+            AppUser user = new AppUser();
                 user.setUserName(mUsername);
                 user.setPassword(mPassword);
                 Limboo.getInstance().setAppUser(user);
-            }
+            // }
 
-            QBAuth.createSession(new QBCallbackImpl() {
+            Limboo.getInstance().doSignUpSignInProcedure(this, new AuthCallback() {
                 @Override
-                public void onComplete(Result result) {
-                    if (result.isSuccess()) {
-                        QBUsers.signUpSignInTask(new QBUser(mUsername, mPassword), new QBCallbackImpl() {
-                            @Override
-                            public void onComplete(Result result) {
-                                showProgress(false);
-                                if (result.isSuccess()) {
-                                    startActivity(new Intent(SignUpActivity.this, Const.LANDING_ACTIVITY));
-                                } else {
-                                    StringBuilder builder = new StringBuilder();
-                                    for (String s : result.getErrors()) {
-                                        builder.append(s);
-                                        builder.append("/n");
-                                    }
-                                    Toast.makeText(SignUpActivity.this, builder, Toast.LENGTH_LONG);
-                                }
-                            }
-
-                        });
-                    } else {
-                        for (String s : result.getErrors()) {
-                            android.util.Log.e(SplashActivity.class.getSimpleName(), s);
-                        }
-
-                    }
+                public void onComplete() {
+                    showProgress(false);
                 }
             });
-
 
             //mAuthTask = new UserLoginTask();
             //mAuthTask.execute((Void) null);
