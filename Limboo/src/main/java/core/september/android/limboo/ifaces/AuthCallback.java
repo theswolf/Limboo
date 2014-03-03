@@ -1,14 +1,16 @@
 package core.september.android.limboo.ifaces;
 
+import com.quickblox.core.result.Result;
+
 /**
  * Created by christian on 28/02/14.
  */
 public interface AuthCallback {
-    void onSessionSuccess();
+    void onSessionSuccess(Result result);
 
-    void onSessionError();
+    void onSessionError(Result result);
 
-    void onAuthSuccess();
+    void onAuthSuccess(Result result);
 
-    void onAuthError();
+    void onAuthError(Result result);
 }

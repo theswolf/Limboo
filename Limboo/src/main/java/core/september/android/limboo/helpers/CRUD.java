@@ -18,7 +18,7 @@ public class CRUD {
     private CRUD() {
         //ClassPath.getTopLevelClasses("core.september.android.limboo.models");
         //Set<Class<? extends CRUDable>> classes = reflections.getSubTypesOf(CRUDable.class);
-        dao = SQLiteDAO.getInstance(Limboo.getInstance(), Const.getModelClasses());
+        dao = SQLiteDAO.getInstance(Limboo.getInstance(), Const._models);
     }
 
     public static CRUD getInstance() {

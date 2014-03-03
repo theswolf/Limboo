@@ -13,30 +13,15 @@ public class Const {
     public final static String AUTHORIZATION_KEY = "HSxgbucxBk-8qvg";
     public final static String AUTHORIZATION_SECRET = "8xvwxEayHXG-X-p";
 
+    public final static String END_OF_LINE = System.getProperty("line.separator");
+
     public final static Class LANDING_ACTIVITY = ActionBarDrawerActivity.class;
 
     private final static String MODEL_PACKAGE = "core.september.android.limboo.models";
+
+
     //private static List<Class<? extends CRUDable>> models = null;
-    private static Class<? extends CRUDable>[] _models = null;
+    public static Class<? extends CRUDable>[] _models = new Class[]{AppUser.class};
 
-    public static Class[] getModelClasses() {
-        if (_models == null) {
-            _models = new Class[]{AppUser.class};
-           /* try {
-                models = new ArrayList<Class<? extends CRUDable>>();
-                ImmutableList<ClassPath.ClassInfo> classes = ClassPath.from(ClassLoader.getSystemClassLoader()).getTopLevelClasses(MODEL_PACKAGE).asList();
-                for(ClassPath.ClassInfo clz : classes){
-                    models.add((Class<? extends CRUDable>) clz.load());
-                }
-                _models = models.toArray(new Class[models.size()]);
-
-            } catch (IOException e) {
-                android.util.Log.e(Const.class.getSimpleName(),e.getMessage(),e);
-            }*/
-        }
-
-        return _models;
-
-    }
 
 }

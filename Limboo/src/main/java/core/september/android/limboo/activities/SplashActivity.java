@@ -9,10 +9,14 @@ import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import com.quickblox.core.result.Result;
 
 import core.september.android.limboo.R;
 import core.september.android.limboo.activities.util.SystemUiHider;
 import core.september.android.limboo.app.Limboo;
+import core.september.android.limboo.constants.Const;
 import core.september.android.limboo.ifaces.AuthCallback;
 
 /**
@@ -159,23 +163,42 @@ public class SplashActivity extends Activity {
         public void run() {
             mSystemUiHider.hide();
             //Intent intent = new Intent();
-            if (Limboo.getInstance().getAppUser() == null) {
+            if (Limboo.getInstance().appUser == null) {
                 startActivity(new Intent(SplashActivity.this, SignUpActivity.class));
-                SplashActivity.this.finish();
             } else {
 
 
-                Limboo.getInstance().doSigningProcedure(SplashActivity.this, new AuthCallback() {
+                Limboo.getInstance().doSessionInit(new AuthCallback() {
                     @Override
-                    public void onComplete() {
+                    public void onSessionSuccess(Result result) {
+                        Limboo.getInstance().doSigningProcedure(this);
                         SplashActivity.this.finish();
+                    }
+
+                    @Override
+                    public void onSessionError(Result result) {
+                        StringBuilder sb = new StringBuilder();
+                        for (String err : result.getErrors()) {
+                            sb.append(err);
+                            sb.append(Const.END_OF_LINE);
+                        }
+
+                        Toast.makeText(SplashActivity.this, sb.toString(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onAuthSuccess(Result result) {
+                        startActivity(new Intent(Limboo.getInstance().runningActivity, Const.LANDING_ACTIVITY));
+                        //SplashActivity.this.finish();
+                    }
+
+                    @Override
+                    public void onAuthError(Result result) {
+                        startActivity(new Intent(Limboo.getInstance().runningActivity, SignUpActivity.class));
                     }
                 });
 
-
             }
-            
-
 
 
         }

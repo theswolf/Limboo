@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import core.september.android.limboo.R;
+import core.september.android.limboo.app.Limboo;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
@@ -46,6 +47,8 @@ public abstract class AuthActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Limboo.getInstance().runningActivity = this;
 
         setContentView(getContentView());
 

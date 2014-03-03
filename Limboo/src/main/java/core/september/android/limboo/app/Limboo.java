@@ -21,9 +21,11 @@ import core.september.android.limboo.models.AppUser;
 public class Limboo extends Application {
 
 
-    private AppUser appUser;
+    public AppUser appUser;
+    public Activity runningActivity;
 
     protected static Limboo sInstance;
+
 
     //private SessionHandler sessionHandler;
     //private SessionHandler sessionHandler;
@@ -56,27 +58,17 @@ public class Limboo extends Application {
         //startService(new Intent(this, LimbooMainService.class));
     }
 
-    public AppUser getAppUser() {
-        if (appUser == null) {
-            appUser = DaoHelper.getAppUser();
-        }
-        return appUser;
-    }
 
-    public void setAppUser(AppUser user) {
-        DaoHelper.setAppUser(user);
-    }
-
-    public void doSigningProcedure(final Activity activity, final AuthCallback callback) {
-        QBUsers.signIn(getAppUser().getUserName(), getAppUser().getPassword(), new QBCallbackImpl() {
+    public void doSigningProcedure(final AuthCallback callback) {
+        QBUsers.signIn(appUser.getUserName(), appUser.getPassword(), new QBCallbackImpl() {
             @Override
             public void onComplete(Result result) {
                 // result comes here
                 // check if result success
                 if (result.isSuccess()) {
-                    callback.onAuthSuccess();
+                    callback.onAuthSuccess(result);
                 } else {
-                    callback.onAuthError();
+                    callback.onAuthError(result);
                 }
             }
         });
@@ -87,9 +79,9 @@ public class Limboo extends Application {
             @Override
             public void onComplete(Result result) {
                 if (result.isSuccess()) {
-                    callback.onSessionSuccess();
+                    callback.onSessionSuccess(result);
                 } else {
-                    callback.onSessionError();
+                    callback.onSessionError(result);
                 }
 
 
@@ -105,12 +97,12 @@ public class Limboo extends Application {
                                 Toast.makeText(activity, builder, Toast.LENGTH_LONG);*/
 
     public void doSignUpSignInProcedure(final AuthCallback callback) {
-        QBUsers.signUpSignInTask(new QBUser(getAppUser().getUserName(), getAppUser().getPassword()), new QBCallbackImpl() {
+        QBUsers.signUpSignInTask(new QBUser(appUser.getUserName(), appUser.getPassword()), new QBCallbackImpl() {
             public void onComplete(Result result) {
                 if (result.isSuccess()) {
-                    callback.onAuthSuccess();
+                    callback.onAuthSuccess(result);
                 } else {
-                    callback.onAuthError();
+                    callback.onAuthError(result);
                 }
 
 
@@ -119,6 +111,12 @@ public class Limboo extends Application {
         });
 
     }
+
+    public void setAppUser(AppUser user) {
+        appUser = user;
+        DaoHelper.setAppUser(appUser);
+    }
+}
     
     
 
