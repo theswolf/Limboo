@@ -1,5 +1,7 @@
 package core.september.android.limboo.helpers;
 
+import android.util.Log;
+
 import com.niusounds.sqlite.SQLiteDAO;
 
 import java.util.List;
@@ -14,6 +16,7 @@ import core.september.android.limboo.ifaces.CRUDable;
 public class CRUD {
     private static CRUD instance;
     private static SQLiteDAO dao;
+    private final static String TAG = CRUD.class.getSimpleName();
 
     private CRUD() {
         //ClassPath.getTopLevelClasses("core.september.android.limboo.models");
@@ -44,6 +47,11 @@ public class CRUD {
     }
 
     public void delete(CRUDable item, String whereClause, String whereArgs) {
-        dao.delete(item.getClass(), whereClause, whereArgs);
+        try {
+            dao.delete(item.getClass(), whereClause, whereArgs);
+        }
+        catch (Throwable t) {
+            Log.e(TAG,t.getMessage(),t);
+        }
     }
 }

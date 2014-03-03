@@ -10,6 +10,7 @@ import com.quickblox.module.auth.QBAuth;
 import com.quickblox.module.users.QBUsers;
 import com.quickblox.module.users.model.QBUser;
 
+import core.september.android.limboo.activities.SignUpActivity;
 import core.september.android.limboo.constants.Const;
 import core.september.android.limboo.helpers.DaoHelper;
 import core.september.android.limboo.ifaces.AuthCallback;
@@ -44,6 +45,7 @@ public class Limboo extends Application {
     protected void initialize() {
 
         QBSettings.getInstance().fastConfigInit(Const.APPLICATION_ID, Const.AUTHORIZATION_KEY, Const.AUTHORIZATION_SECRET);
+        appUser = DaoHelper.getAppUser();
 /*        QBAuth.createSession(new QBCallbackImpl() {
             @Override
             public void onComplete(Result result) {

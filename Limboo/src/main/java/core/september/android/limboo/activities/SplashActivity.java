@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.quickblox.core.result.Result;
 
+import java.util.concurrent.TimeUnit;
+
 import core.september.android.limboo.R;
 import core.september.android.limboo.activities.util.SystemUiHider;
 import core.september.android.limboo.app.Limboo;
@@ -138,7 +140,7 @@ public class SplashActivity extends Activity {
         // Trigger the initial hide() shortly after the activity has been
         // created, to briefly hint to the user that UI controls
         // are available.
-        delayedHide(100);
+        delayedHide(3000);
     }
 
 
@@ -165,6 +167,7 @@ public class SplashActivity extends Activity {
             //Intent intent = new Intent();
             if (Limboo.getInstance().appUser == null) {
                 startActivity(new Intent(SplashActivity.this, SignUpActivity.class));
+                SplashActivity.this.finish();
             } else {
 
 
@@ -189,12 +192,13 @@ public class SplashActivity extends Activity {
                     @Override
                     public void onAuthSuccess(Result result) {
                         startActivity(new Intent(Limboo.getInstance().runningActivity, Const.LANDING_ACTIVITY));
-                        //SplashActivity.this.finish();
+                        Limboo.getInstance().runningActivity.finish();
                     }
 
                     @Override
                     public void onAuthError(Result result) {
                         startActivity(new Intent(Limboo.getInstance().runningActivity, SignUpActivity.class));
+                        //Limboo.getInstance().runningActivity.finish();
                     }
                 });
 

@@ -1,12 +1,17 @@
 package core.september.android.limboo.activities;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.quickblox.core.result.Result;
 
 import core.september.android.limboo.R;
 import core.september.android.limboo.abs.AuthActivity;
 import core.september.android.limboo.app.Limboo;
+import core.september.android.limboo.constants.Const;
 import core.september.android.limboo.ifaces.AuthCallback;
 import core.september.android.limboo.models.AppUser;
 
@@ -113,17 +118,53 @@ public class LoginActivity extends AuthActivity {
                 Limboo.getInstance().setAppUser(user);
             //}
 
-            Limboo.getInstance().doSigningProcedure(this, new AuthCallback() {
+            Limboo.getInstance().doSessionInit(new AuthCallback() {
                 @Override
-                public void onComplete() {
-                    showProgress(false);
+                public void onSessionSuccess(Result result) {
+                    Limboo.getInstance().doSigningProcedure(this);
+                    //SplashActivity.this.finish();
+                }
+
+                @Override
+                public void onSessionError(Result result) {
+                    StringBuilder sb = new StringBuilder();
+                    for (String err : result.getErrors()) {
+                        sb.append(err);
+                        sb.append(Const.END_OF_LINE);
+                    }
+
+                    Toast.makeText(LoginActivity.this, sb.toString(), Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onAuthSuccess(Result result) {
+                    startActivity(new Intent(Limboo.getInstance().runningActivity, Const.LANDING_ACTIVITY));
+                    Limboo.getInstance().runningActivity.finish();
+                }
+
+                @Override
+                public void onAuthError(Result result) {
+                    StringBuilder sb = new StringBuilder();
+                    for (String err : result.getErrors()) {
+                        sb.append(err);
+                        sb.append(Const.END_OF_LINE);
+                    }
+
+                    Toast.makeText(LoginActivity.this, sb.toString(), Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(LoginActivity.this,LoginActivity.class));
+                    LoginActivity.this.finish();
                 }
             });
+
+        }
+
+        //mAuthTask = new UserLoginTask();
+        //mAuthTask.execute((Void) null);
+    }
 
 
             //mAuthTask = new UserLoginTask();
             //mAuthTask.execute((Void) null);
         }
-    }
 
-}
+
