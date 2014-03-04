@@ -112,6 +112,7 @@ public class SignUpActivity extends LoginActivity {
             AppUser user = new AppUser();
                 user.setUserName(mUsername);
                 user.setPassword(mPassword);
+                user.setEmail(mEmail);
                 Limboo.getInstance().setAppUser(user);
             // }
 

@@ -17,6 +17,8 @@ public class AppUser implements CRUDable {
     private String userName;
     @Persistence
     private String password;
+    @Persistence
+    private String email;
 
     public long get_id() {
         return _id;
@@ -40,5 +42,13 @@ public class AppUser implements CRUDable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

@@ -111,12 +111,12 @@ public class LoginActivity extends AuthActivity {
             showProgress(true);
 
 
-            //if (Limboo.getInstance().getAppUser() == null) {
+            if (Limboo.getInstance().appUser == null) {
             AppUser user = new AppUser();
                 user.setUserName(mUsername);
                 user.setPassword(mPassword);
                 Limboo.getInstance().setAppUser(user);
-            //}
+            }
 
             Limboo.getInstance().doSessionInit(new AuthCallback() {
                 @Override
